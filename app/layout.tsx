@@ -1,5 +1,6 @@
 import Layout from './components/Layout'
 import './globals.css'
+import Modal from './modal/Modal'
 
 export const metadata = {
   title: 'twitter Clone',
@@ -14,6 +15,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
+        <Modal />
         <Layout>
           {children}
         </Layout>
