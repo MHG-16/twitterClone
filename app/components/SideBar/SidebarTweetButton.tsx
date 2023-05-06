@@ -1,13 +1,19 @@
 'use client';
 
+import useLoginModal from '@/app/hooks/useLoginModal';
 import { useRouter } from 'next/navigation'
-import React from 'react'
+import React, { useCallback } from 'react'
 import { FaFeather } from 'react-icons/fa';
 
 const SidebarTweetButton = () => {
   const router = useRouter();
+  const loginModal = useLoginModal();
+
+  const onClick = useCallback(() => {
+    loginModal.onOpen();
+  }, [loginModal])
   return (
-    <div>
+    <div onClick={onClick}>
       <div className='mt-6 lg:hidden rounded-full 
     h-14 w-14 p-4 flex items-center bg-sky-500
     transition cursor-pointer'>

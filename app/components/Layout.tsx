@@ -2,13 +2,16 @@ import React from 'react'
 
 import Sidebar from './SideBar/Sidebar'
 import { FollowBar } from './FlowBar/FollowBar'
+import { User } from '@prisma/client'
 
 
 interface LayoutProps {
-    children: React.ReactNode
+    children: React.ReactNode,
+    user?: User
+
 }
 
-const Layout : React.FC<LayoutProps> = ({children}) => {
+const Layout : React.FC<LayoutProps> = ({children, user}) => {
   return (
     <div className='h-screen bg-black'>
         <div className='container h-full mx-auto xl:px-30 max-w-6xl'>
