@@ -2,16 +2,19 @@
 
 import React, { useCallback, useState } from 'react'
 
-import useLoginModal from '@/app/hooks/useLoginModal'
 import Input from '../share/Input';
 import Modal from '../share/Modal';
+import useRegisterModal from '@/app/hooks/useRegisterModal';
+import useLoginModal from '@/app/hooks/useLoginModal'
 
 
 const LoginModal = () => {
   const loginModal = useLoginModal();
+  const registerModal = useRegisterModal();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [isLoading, setLoading] = useState(false)
+  const [isLoading, setLoading] = useState(false);
+
 
   const onSubmit = useCallback(async() => {
     try{
@@ -35,7 +38,7 @@ const LoginModal = () => {
         />
         <Input 
             placeholder='Password'
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={(e) => setPassword(e.target.value)}
             value={password}
             disabled={isLoading}
         />

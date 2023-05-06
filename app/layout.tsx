@@ -1,5 +1,6 @@
 import Layout from './components/Layout'
 import LoginModal from './components/modal/LoginModal'
+import RegisterModal from './components/modal/RegisterModal'
 import './globals.css'
 
 export const metadata = {
@@ -16,6 +17,7 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <LoginModal />
+        <RegisterModal />
         <Layout>
           {children}
         </Layout>
