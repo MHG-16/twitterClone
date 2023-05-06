@@ -51,6 +51,7 @@ const RegisterModal = () => {
 interface BodyFooterModalProps {
   isLoading: boolean
 }
+
 const BodyModal : React.FC<BodyFooterModalProps> = ({
   isLoading
 }) => {
