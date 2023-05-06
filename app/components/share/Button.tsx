@@ -25,7 +25,7 @@ const Button : React.FC<ButtonProps> = ({
             disabled={disabled}
             className={
                 `disabled:opacity-70 hover:opacity-80
-                disabled: cursor-not-allowed
+                disabled:cursor-not-allowed
                 rounded-full font-semibold transition
                 border-2 ${fullWidth ? 'w-full' : 'w-fit'}
                 ${secondary ? 'bg-white' : 'bg-sky-500'}
@@ -39,6 +39,7 @@ const Button : React.FC<ButtonProps> = ({
                 `
 
             } 
+            onClick={onClick}
         >
             {label}
         </button>

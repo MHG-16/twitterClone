@@ -6,10 +6,16 @@ import Input from '../share/Input';
 import Modal from '../share/Modal';
 import useRegisterModal from '@/app/hooks/useRegisterModal';
 import useLoginModal from '@/app/hooks/useLoginModal'
+import axios from 'axios';
+import { toast } from 'react-hot-toast';
 
 
 const RegisterModal = () => {
   const loginModal = useLoginModal();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [name, setName] = useState("");
+  const [username, setUsername] = useState("")
   const registerModal = useRegisterModal();
   const [isLoading, setLoading] = useState(false);
 
@@ -18,16 +24,26 @@ const RegisterModal = () => {
     try{
         setLoading(true);
 
-        // TODO
+        await axios.post('/api/register', {
+          email, password, username, name
+        });
+
+        toast.success('Account created');
 
         registerModal.onClose();
     }catch(error) {
         console.log(error);
+        toast.error("Something went wrong|")
     }
-  }, [registerModal]);
+  }, [email, name, password, registerModal, username]);
 
   const bodyContent = (
-    <BodyModal isLoading={isLoading}/>
+    <BodyModal isLoading={isLoading} 
+    email={email} setEmail={setEmail}
+    password={password} setPassword={setPassword}
+    username={username} setUsername={setUsername}
+    name={name} setName={setName}
+    />
   );
 
   const footerContent = (
@@ -48,17 +64,34 @@ const RegisterModal = () => {
   )
 }
 
-interface BodyFooterModalProps {
+interface BodyModalProps {
+  isLoading: boolean
+  email: string;
+  setEmail: (email: string) => void;
+  password: string;
+  setPassword: (password: string ) => void
+  name: string;
+  setName: (name: string) => void;
+  username: string;
+  setUsername: (name: string) => void;
+}
+
+interface FooterModalProps {
   isLoading: boolean
 }
 
-const BodyModal : React.FC<BodyFooterModalProps> = ({
-  isLoading
+const BodyModal : React.FC<BodyModalProps> = ({
+  isLoading,
+  email = '',
+  setEmail,
+  password = '',
+  setPassword,
+  name,
+  setName,
+  username,
+  setUsername
+
 }) => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [name, setName] = useState("");
-  const [username, setUsername] = useState("")
   return (
     <div className='flex flex-col gap-4'>
         <Input 
@@ -90,7 +123,7 @@ const BodyModal : React.FC<BodyFooterModalProps> = ({
 }
 
 
-const FooterModal : React.FC<BodyFooterModalProps>= ({
+const FooterModal : React.FC<FooterModalProps>= ({
   isLoading
 }) => {
   const registerModal = useRegisterModal();

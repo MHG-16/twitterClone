@@ -2,6 +2,7 @@ import Layout from './components/Layout'
 import LoginModal from './components/modal/LoginModal'
 import RegisterModal from './components/modal/RegisterModal'
 import './globals.css'
+import ToasterProvider from './providers/ToasterProvider'
 
 export const metadata = {
   title: 'twitter Clone',
@@ -16,6 +17,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
+        <ToasterProvider />
         <LoginModal />
         <RegisterModal />
         <Layout>
