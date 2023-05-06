@@ -21,16 +21,19 @@ const Sidebar: React.FC<SidebarProps> = ({ user }) => {
       label: "Home",
       href: "/",
       icon: BsHouseFill,
+      auth: false
     },
     {
       label: "Notifications",
       href: "/notifications",
       icon: BsBellFill,
+      auth: true
     },
     {
       label: "Profile",
       href: "users/123",
       icon: FaUser,
+      auth: true
     },
   ];
 
@@ -45,10 +48,12 @@ const Sidebar: React.FC<SidebarProps> = ({ user }) => {
               href={item.href}
               icon={item.icon}
               label={item.label}
+              currentUser={user}
+              auth={item.auth}
             />
           ))}
           {user && (
-            <SidebarItem onClick={() => {signOut()}} icon={BiLogOut} label="logout" />
+            <SidebarItem onClick={() => signOut()} icon={BiLogOut} label="logout" auth={true}/>
           )}
 
           <SidebarTweetButton />

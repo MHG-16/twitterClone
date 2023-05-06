@@ -8,6 +8,8 @@ import useRegisterModal from '@/app/hooks/useRegisterModal';
 import useLoginModal from '@/app/hooks/useLoginModal'
 import axios from 'axios';
 import { toast } from 'react-hot-toast';
+import { signIn } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
 
 
 const RegisterModal = () => {
@@ -18,6 +20,7 @@ const RegisterModal = () => {
   const [username, setUsername] = useState("")
   const registerModal = useRegisterModal();
   const [isLoading, setLoading] = useState(false);
+  const router = useRouter();
 
 
   const onSubmit = useCallback(async() => {
@@ -30,12 +33,27 @@ const RegisterModal = () => {
 
         toast.success('Account created');
 
+    signIn('credentials', {email,password, redirect: false})
+    .then((callback) => {
+
+      if (callback?.ok)
+      {
+        toast.success("Logged in");
+        loginModal.onClose();
+        router.refresh();
+      }
+
+      if (callback?.error)
+        toast.error(callback.error);
+      
+    })
+
         registerModal.onClose();
     }catch(error) {
         console.log(error);
         toast.error("Something went wrong|")
     }
-  }, [email, name, password, registerModal, username]);
+  }, [email, loginModal, name, password, registerModal, router, username]);
 
   const bodyContent = (
     <BodyModal isLoading={isLoading} 
@@ -99,6 +117,7 @@ const BodyModal : React.FC<BodyModalProps> = ({
             onChange={(e) => setEmail(e.target.value)}
             value={email}
             disabled={isLoading}
+            type='email'
         />
         <Input 
             placeholder='Name'
@@ -117,6 +136,7 @@ const BodyModal : React.FC<BodyModalProps> = ({
             onChange={(e) => setPassword(e.target.value)}
             value={password}
             disabled={isLoading}
+            type='password'
         />
     </div>
   )
