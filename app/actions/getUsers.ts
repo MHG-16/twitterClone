@@ -1,29 +1,25 @@
 import prisma from '@/app/libs/prismadb';
 
 export interface IUsersParams {
-    userId?: string;
+    limit?: number;
 }
 
 export default async function getUsers(params: IUsersParams) {
     try{
-        const {userId} = params;
-        if(!userId) throw new Error('Invalid ID');
+        const {limit} = params;
 
-        const existingUser = await prisma.user.findUnique({
-            where: {
-                id: userId
+        const users = limit ?  prisma.user.findMany({
+            orderBy: {
+                createdAt: 'desc'
+            },
+            take: limit,
+        }) : prisma.user.findMany({
+            orderBy: {
+                createdAt: 'desc'
             }
         });
 
-        const followedUserCount = await prisma.user.count({
-            where: {
-                followingIds: {
-                    has: userId
-                }
-            }
-        })
-
-        return({...existingUser, followedUserCount})
+        return {users}
     }catch(error) {
 
     }
