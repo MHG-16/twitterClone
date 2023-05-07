@@ -8,18 +8,18 @@ export default async function getUsers(params: IUsersParams) {
     try{
         const {limit} = params;
 
-        const users = limit ?  prisma.user.findMany({
+        const users = limit ?  await prisma.user.findMany({
             orderBy: {
                 createdAt: 'desc'
             },
             take: limit,
-        }) : prisma.user.findMany({
+        }) : await prisma.user.findMany({
             orderBy: {
                 createdAt: 'desc'
             }
         });
 
-        return {users}
+        return users
     }catch(error) {
 
     }
