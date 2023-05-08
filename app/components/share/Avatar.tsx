@@ -1,5 +1,8 @@
+'use client';
+
 import { User } from "prisma/prisma-client";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 interface AvatarProps {
     user: User;
@@ -12,6 +15,7 @@ const Avatar: React.FC<AvatarProps> = ({
     isLarge,
     hasBorder
 }) => {
+    const router = useRouter();
     return (
         <div className={`
         ${hasBorder ? 'border-4 border-black': ''}
@@ -25,7 +29,7 @@ const Avatar: React.FC<AvatarProps> = ({
                 }}
 
                 alt="Avatar"
-                onClick={() => {}}
+                onClick={() => {router.push(`/users/${user.id}`)}}
                 src={user?.profileImage || '/images/avatar.png'}
             />
         </div>

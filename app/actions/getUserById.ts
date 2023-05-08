@@ -26,6 +26,6 @@ export default async function getUserById(params: IParams) {
 
     return { ...existingUser, followersCount };
   } catch (error) {
-    console.log(error);
+    return null;
   }
 }
