@@ -12,7 +12,7 @@ import SidebarTweetButton from "./SidebarTweetButton";
 import { User } from "@prisma/client";
 
 interface SidebarProps {
-  user?: User;
+  user?: {currentUser: User};
 }
 
 const Sidebar: React.FC<SidebarProps> = ({ user }) => {
@@ -31,7 +31,7 @@ const Sidebar: React.FC<SidebarProps> = ({ user }) => {
     },
     {
       label: "Profile",
-      href: "users/123",
+      href: `/users/${user?.currentUser?.id}`,
       icon: FaUser,
       auth: true
     },
@@ -48,7 +48,7 @@ const Sidebar: React.FC<SidebarProps> = ({ user }) => {
               href={item.href}
               icon={item.icon}
               label={item.label}
-              currentUser={user}
+              currentUser={user?.currentUser}
               auth={item.auth}
             />
           ))}

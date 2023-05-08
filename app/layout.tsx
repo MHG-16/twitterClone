@@ -6,6 +6,7 @@ import './globals.css'
 import ToasterProvider from './providers/ToasterProvider'
 import getCurrentUser from './actions/getCurrentUser'
 import getUsers from './actions/getUsers'
+import EditModal from './components/modal/EditModal'
 
 export const metadata = {
   title: 'twitter Clone',
@@ -24,6 +25,7 @@ const RootLayout = async (
         <ToasterProvider />
         <LoginModal />
         <RegisterModal />
+        <EditModal user={currentUser}/>
         <Layout user={currentUser} users={users}>
           {children}
         </Layout>
