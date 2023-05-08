@@ -16,16 +16,18 @@ const UserBio : React.FC<UserBioProps>= ({user, currentUser}) => {
     if(!user?.createdAt) return null;
 
     return format(new Date(user.createdAt), 'MMMM yyyy')
-  }, [user?.createdAt])
+  }, [user?.createdAt]);
+
   return (
     <div className="border-b-[1px] border-neutral-800 pb-4">
       <div className='flex justify-end p-2'>
-        {user?.id === currentUser?.id ? (
+        
+        {user?.id === currentUser?.currentUser?.id ? (
           <Button secondary label='Edit' onClick={() => {}} />
         )
         : (<Button onClick={() => {}} secondary label='Follow'/>)
         }
-      </div>
+      </div><p className="text-white">{currentUser?.id}</p>
       <div className='mt-8 px-4'>
         <div className='flex flex-col'>
           <p className='text-white text-2xl font-semibold'>
