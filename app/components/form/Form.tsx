@@ -68,7 +68,7 @@ const WhenUserConnected : React.FC<WhenUserConnectedProps>= ({
     try{
       setLoading(true);
 
-      await axios.post('/api/post/', { body });
+      await axios.post('/api/posts/', { body });
 
       setBody('');
       toast.success("Tweet created");
