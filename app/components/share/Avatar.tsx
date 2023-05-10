@@ -5,7 +5,7 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 
 interface AvatarProps {
-    user: User;
+    user?: User;
     isLarge?: boolean;
     hasBorder?: boolean;
 }
@@ -29,7 +29,7 @@ const Avatar: React.FC<AvatarProps> = ({
                 }}
 
                 alt="Avatar"
-                onClick={() => {router.push(`/users/${user.id}`)}}
+                onClick={() => {router.push(`/users/${user?.id}`)}}
                 src={user?.profileImage || '/images/avatar.png'}
             />
         </div>

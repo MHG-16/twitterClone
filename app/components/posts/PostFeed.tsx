@@ -1,8 +1,21 @@
-import React from 'react'
+'use client';
 
-const PostFeed = () => {
+import { Post, User } from '@prisma/client';
+import React from 'react';
+import PostItem from './PostItem';
+
+interface PostFeedProps{
+    posts: any;
+    user?: User
+}
+
+const PostFeed : React.FC<PostFeedProps> = ({posts, user}) => {
   return (
-    <div>PostFeed</div>
+    <>
+        {posts.map((post: Post) => (
+            <PostItem key={post.id} user={user} data={post}/>
+        ))}
+    </>
   )
 }
 

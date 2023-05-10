@@ -14,7 +14,6 @@ interface FormProps {
   placeholder: string;
   isComment?: boolean;
   postId?: string;
-  posts: Post[];
   currentUser: {currentUser: User} | null
 }
 const Form : React.FC<FormProps> = ({
