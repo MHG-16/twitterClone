@@ -6,12 +6,12 @@ import Header from "./components/share/Header";
 
 export default async function Home() {
   const user = await getCurrentUser();
-  const posts = await getPosts({userId: user?.currentUser.id || ""});
+  const posts = await getPosts({userId: ""});
   return (
     <>
       <Header label="Home" />
       <Form placeholder="What's happening?" currentUser={user}/>
-      <PostFeed posts={posts} user={user?.currentUser}/>
+      <PostFeed posts={posts}/>
     </>
   )
 }

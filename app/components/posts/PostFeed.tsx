@@ -6,14 +6,13 @@ import PostItem from './PostItem';
 
 interface PostFeedProps{
     posts: any;
-    user?: User
 }
 
-const PostFeed : React.FC<PostFeedProps> = ({posts, user}) => {
+const PostFeed : React.FC<PostFeedProps> = ({posts}) => {
   return (
     <>
-        {posts.map((post: Post) => (
-            <PostItem key={post.id} user={user} data={post}/>
+        {posts.map((post: any) => (
+            <PostItem key={post.id} user={post.user} data={post}/>
         ))}
     </>
   )
