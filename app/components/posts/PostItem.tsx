@@ -27,6 +27,8 @@ const PostItem : React.FC<PostFeedProps> = ({data, user}) => {
     router.push(`/posts/${data.id}`)
   }, [router, data.id]);
 
+  console.log(data.id)
+
   const onLike = useCallback((event: any) => {
     event.stopPropagation();
 

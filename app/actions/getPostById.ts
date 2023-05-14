@@ -24,7 +24,7 @@ export default async function getPostById (params: IParams) {
         }
     });
 
-    if (post) return null;
+    if (!post) return null;
 
     return post;
   } catch (error: any) {
