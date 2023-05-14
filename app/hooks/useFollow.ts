@@ -16,15 +16,14 @@ const useFollow = (user: User, userId: string) => {
         return list.includes(userId);
     }, [user, userId]);
 
-    const toggleFollow = useCallback(async (e: React.MouseEvent<HTMLDivElement>) => {
-        e.stopPropagation();
+    const toggleFollow = useCallback(async () => {
 
         if(!user) return loginModal.onOpen();
 
         try{
             let request;
-            request = isFollowing ? () => axios.delete("/api/follow/")
-            : () => axios.post(`/apu/follow/${userId}`);
+            request = isFollowing ? () => axios.delete("/api/follow/"+userId)
+            : () => axios.post(`/api/follow`, {userId});
 
             await request();
             router.refresh();

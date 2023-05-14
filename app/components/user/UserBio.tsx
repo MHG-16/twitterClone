@@ -1,11 +1,11 @@
 'use client';
 
-import { User } from '@prisma/client';
 import { format } from 'date-fns';
 import React, { useMemo } from 'react'
 import Button from '../share/Button';
 import { BiCalendar } from 'react-icons/bi';
 import useEditModal from '@/app/hooks/useEditModal';
+import useFollow from '@/app/hooks/useFollow';
 
 
 interface UserBioProps {
@@ -20,6 +20,7 @@ const UserBio : React.FC<UserBioProps>= ({user, currentUser}) => {
   }, [user?.createdAt]);
 
   const editModal = useEditModal();
+  const { isFollowing, toggleFollow } = useFollow(currentUser.currentUser, user.id);
 
   return (
     <div className="border-b-[1px] border-neutral-800 pb-4">
@@ -28,7 +29,7 @@ const UserBio : React.FC<UserBioProps>= ({user, currentUser}) => {
         {user?.id === currentUser?.currentUser?.id ? (
           <Button secondary label='Edit' onClick={() => {editModal.onOpen()}} />
         )
-        : (<Button onClick={() => {}} secondary label='Follow'/>)
+        : (<Button onClick={toggleFollow} secondary={!isFollowing} label={isFollowing ? 'Unfollow' : 'Follow'}/>)
         }
       </div><p className="text-white">{currentUser?.id}</p>
       <div className='mt-8 px-4'>

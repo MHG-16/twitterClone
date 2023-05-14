@@ -25,15 +25,18 @@ const LoginModal = () => {
         (callback) => {
           if (callback?.ok) {
             toast.success("Logged in");
-            loginModal.onClose();
-            router.refresh()
           }
 
           if (callback?.error) toast.error(callback.error);
+          loginModal.onClose();
+          setLoading(false);
+          router.refresh()
         }
       );
     } catch (error) {
       toast.error("Something went wrong|");
+      loginModal.onClose();
+      setLoading(false);
     }
   }, [email, loginModal, password, router]);
 
