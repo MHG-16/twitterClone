@@ -33,6 +33,7 @@ const PostItem : React.FC<PostFeedProps> = ({data, userId}) => {
 
 
   const onLike = useCallback((event: any) => {
+    event.stopPropagation();
     if(!userId) return loginModal.onOpen();
     toggleLike();
   }, [loginModal, toggleLike, userId]);

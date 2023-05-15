@@ -1,6 +1,5 @@
 'use client';
 
-import { Post, User } from '@prisma/client';
 import React from 'react';
 import PostItem from './PostItem';
 
