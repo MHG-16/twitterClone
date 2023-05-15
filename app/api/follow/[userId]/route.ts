@@ -38,8 +38,6 @@ export async function DELETE(req:Request,{ params }: { params: IParams }) {
       },
     });
 
-    console.log(updatedUser)
-
     return NextResponse.json(updatedUser);
   } catch (error) {
     console.log(error);

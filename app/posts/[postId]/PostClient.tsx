@@ -10,7 +10,6 @@ interface PostClientProps {
 }
 
 const PostClient : React.FC<PostClientProps> = ({ post, user }) => {
-  console.log(post)
   return (
     <>
       <Header label='Tweet' showBackArrow />
