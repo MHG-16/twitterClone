@@ -12,7 +12,7 @@ const Postpage = async ({params} : {params: IParams}) => {
     const post = await getPostById(params);
     const user = await getCurrentUser();
     return (
-    <PostClient post={post} user={user?.currentUser}/>
+    <PostClient post={post} user={user}/>
   )
 }
 

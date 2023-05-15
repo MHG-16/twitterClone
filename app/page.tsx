@@ -11,7 +11,7 @@ export default async function Home() {
     <>
       <Header label="Home" />
       <Form placeholder="What's happening?" currentUser={user}/>
-      <PostFeed posts={posts}/>
+      <PostFeed posts={posts} userId={user?.currentUser.id}/>
     </>
   )
 }

@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 import getCurrentUser from "@/app/actions/getCurrentUser";
 import prisma from "@/app/libs/prismadb";
 
-export default async function POST(request: Request) {
+export async function POST(request: Request) {
   try {
     const body = await request.json();
     const { postId } = body;
@@ -18,13 +18,15 @@ export default async function POST(request: Request) {
       },
     });
 
+    console.log(post)
+
     if (!post) return NextResponse.error();
 
     let updatedLikes = [...(post.likedIds || [])];
 
     updatedLikes.push(currentUser.currentUser.id);
 
-    const updatedPost = prisma.post.update({
+    const updatedPost = await prisma.post.update({
         where:{
             id: postId
         },

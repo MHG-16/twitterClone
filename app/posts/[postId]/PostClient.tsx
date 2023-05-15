@@ -13,7 +13,7 @@ const PostClient : React.FC<PostClientProps> = ({ post, user }) => {
   return (
     <>
       <Header label='Tweet' showBackArrow />
-      <PostItem data={post} />
+      <PostItem data={post} userId={user?.currentUser.id}/>
       <Form 
         postId={post.postId as string}
         isComment

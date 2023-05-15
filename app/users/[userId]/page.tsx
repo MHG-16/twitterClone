@@ -20,7 +20,7 @@ const page = async ({params} : {params: IParams}) => {
         <Header showBackArrow label={user?.name || "user Profile"} />
         <UserClient user={user} />
         <UserBio user={user} currentUser={currentUser}/>
-        <PostFeed posts={postsByUser} />
+        <PostFeed posts={postsByUser} userId={currentUser?.currentUser.id}/>
     </div>
   )
 }

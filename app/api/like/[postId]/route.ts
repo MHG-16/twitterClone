@@ -28,7 +28,7 @@ export async function DELETE(
 
     updatedLikes = updatedLikes.filter((userId) => userId !== userId);
 
-    const updatedPost = prisma.post.update({
+    const updatedPost = await prisma.post.update({
         where:{
             id: postId
         },

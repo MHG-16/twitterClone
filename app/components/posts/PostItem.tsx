@@ -6,16 +6,20 @@ import {  formatDistanceToNowStrict } from 'date-fns';
 import { useRouter } from 'next/navigation';
 import React, { useCallback, useMemo } from 'react'
 import Avatar from '../share/Avatar';
-import { AiOutlineHeart, AiOutlineMessage } from 'react-icons/ai';
+import { AiFillHeart, AiOutlineHeart, AiOutlineMessage } from 'react-icons/ai';
+import useLike from '@/app/hooks/useLike';
 
 
 interface PostFeedProps{
     data: any;
-    user?: User ;
+    userId?: string ;
 }
-const PostItem : React.FC<PostFeedProps> = ({data, user}) => {
+const PostItem : React.FC<PostFeedProps> = ({data, userId}) => {
   const router = useRouter();
   const loginModal = useLoginModal();
+  const { isLiked, toggleLike} = useLike(data, userId);
+
+  const LikeIcon = isLiked ? AiFillHeart : AiOutlineHeart;
   
   const goToUserProfile = useCallback((event: any) => {
     event.stopPropagation();
@@ -29,10 +33,9 @@ const PostItem : React.FC<PostFeedProps> = ({data, user}) => {
 
 
   const onLike = useCallback((event: any) => {
-    event.stopPropagation();
-
-    loginModal.onOpen();
-  }, [loginModal]);
+    if(!userId) return loginModal.onOpen();
+    toggleLike();
+  }, [loginModal, toggleLike, userId]);
 
   const createdAt = useMemo(() => {
     if(!data?.createdAt) return null;
@@ -75,16 +78,17 @@ const PostItem : React.FC<PostFeedProps> = ({data, user}) => {
                   >
                     <AiOutlineMessage size={20}/>
                     <p>
-                      {data.comments?.lenght || 0}
+                      {data.comments.length || 0}
                     </p>
                   </div>
                   <div
                     className='flex flex-row items-center text-neutral-500 gap-2 cursor-pointer 
-                    transition hover:text-sky-500'
+                    transition hover:text-red-500'
+                    onClick={onLike}
                   >
-                    <AiOutlineHeart size={20}/>
+                    <LikeIcon size={20} color={isLiked ? 'red' : ''}/>
                     <p>
-                      {data.comments?.lenght || 0}
+                      {data.likedIds.length || 0}
                     </p>
                   </div>
                 </div>
