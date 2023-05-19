@@ -6,14 +6,17 @@ import getCurrentUser from "@/app/actions/getCurrentUser";
 interface IParams {
   userId?: string;
 }
+
+
 export async function DELETE(req:Request,{ params }: { params: IParams }) {
   try {
     const { userId } = params;
 
     const currentUser = await getCurrentUser();
 
-    if (!currentUser?.currentUser || typeof userId !== "string")
+    if (!currentUser?.currentUser || typeof userId !== "string") {
       throw new Error("Invalid userID");
+    }
 
     const user = await prisma.user.findUnique({
       where: {
@@ -21,7 +24,9 @@ export async function DELETE(req:Request,{ params }: { params: IParams }) {
       },
     });
 
-    if (!user) throw new Error("Invalid user");
+    if (!user) {
+      throw new Error("Invalid user");
+    }
 
     let updatedFollowingIds = [...(user.followingIds || [])];
 
