@@ -65,7 +65,7 @@ const PostItem : React.FC<PostFeedProps> = ({data, userId}) => {
                     hover:underline hidden md:block'>
                         @{data.user.username}
                     </span>
-                    <span>
+                    <span className='text-slate-100 font-semibold'>
                       {createdAt}
                     </span>
                 </div>
