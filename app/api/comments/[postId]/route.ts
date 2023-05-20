@@ -11,15 +11,15 @@ interface IParams {
 export async function POST(request: Request, { params } : {params: IParams}){
     try{
         const currentUser = await getCurrentUser();
-
         if(!currentUser?.currentUser){
             throw new Error('Auth Error');
         }
-        const body = await request.json();
+        const bodyRequete = await request.json();
+        const { body } = bodyRequete;
         const { postId } = params;
         if(!postId || typeof postId !== 'string'){
             throw new Error('Invalid Id');
-        }
+        };
 
         const comment = await prisma.comment.create({
             data: {
@@ -29,7 +29,8 @@ export async function POST(request: Request, { params } : {params: IParams}){
             }
         });
 
-        NextResponse.json(comment);
+
+        return NextResponse.json(comment);
     }catch(error){
         return NextResponse.error();
     }
