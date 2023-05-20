@@ -56,7 +56,7 @@ const Sidebar: React.FC<SidebarProps> = ({ user }) => {
             <SidebarItem onClick={() => signOut()} icon={BiLogOut} label="logout" auth={true}/>
           )}
 
-          <SidebarTweetButton />
+          <SidebarTweetButton user={user?.currentUser}/>
         </div>
       </div>
     </div>

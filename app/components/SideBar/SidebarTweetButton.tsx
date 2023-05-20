@@ -1,17 +1,25 @@
 'use client';
 
 import useLoginModal from '@/app/hooks/useLoginModal';
+import { User } from '@prisma/client';
 import { useRouter } from 'next/navigation'
 import React, { useCallback } from 'react'
 import { FaFeather } from 'react-icons/fa';
 
-const SidebarTweetButton = () => {
+interface SidebarTweetButtonProps {
+  user?: User;
+}
+
+const SidebarTweetButton : React.FC<SidebarTweetButtonProps> = ({user}) => {
   const router = useRouter();
   const loginModal = useLoginModal();
 
   const onClick = useCallback(() => {
-    loginModal.onOpen();
-  }, [loginModal])
+    if(!user){
+      return loginModal.onOpen();
+    }
+    router.push("/")
+  }, [loginModal, router, user]);
   return (
     <div onClick={onClick}>
       <div className='mt-6 lg:hidden rounded-full 
