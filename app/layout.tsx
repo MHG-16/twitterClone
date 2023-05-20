@@ -18,7 +18,7 @@ const RootLayout = async (
   children
   } :  {children: React.ReactElement}) => {
   const currentUser = await getCurrentUser();
-  const users = await getUsers({limit: 5}) || [];
+  const users = await getUsers({limit: 10}) || [];
   return (
     <html lang="en">
       <body>
